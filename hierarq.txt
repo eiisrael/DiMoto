@@ -1,0 +1,20 @@
+/xampp/htdocs/DiMoto
+  ├─ /public
+  │   ├─ index.html
+  │   ├─ style.css
+  │   └─ app.js
+  └─ /api
+      ├─ config.php
+      ├─ helpers.php
+      ├─ csrf.php
+      ├─ middleware.php
+      ├─ register.php
+      ├─ login.php
+      ├─ logout.php
+      ├─ me.php
+      ├─ request_ride.php
+      ├─ ride_status.php
+      ├─ driver_set_online.php
+      ├─ driver_update_location.php
+      ├─ driver_accept_ride.php
+      └─ ride_complete.php
