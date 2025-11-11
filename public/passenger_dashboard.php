@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__ . '/../api/config.php';
+require_once __DIR__ . '/../api/helpers.php';
 require_once __DIR__ . '/../api/middleware.php';
+
+// Autentica e captura dados do usuário logado
 $user = require_auth($pdo);
 ?>
 <!doctype html>
@@ -20,8 +24,10 @@ $user = require_auth($pdo);
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><div class="badge">DM</div>
-    <span>Bem-vindo(a), <?= htmlspecialchars($user['name']) ?></span></div>
+  <div class="brand">
+    <div class="badge">DM</div>
+    <span>Bem-vindo(a), <?= htmlspecialchars($user['name']) ?></span>
+  </div>
   <form method="post" action="../api/logout.php">
     <button class="btn btn-light" style="font-size:.9rem;">Sair</button>
   </form>
@@ -44,20 +50,20 @@ $user = require_auth($pdo);
     <button id="calc" class="btn btn-brand btn-full mt12">Calcular Tarifa</button>
     <div id="res" class="info mt8"></div>
   </div>
-
   <div class="map-sim">🧭 Mapa Simulado (localização em breve)</div>
 </main>
 
 <script>
 const tarifa_base = 3.00;
 const valor_minuto = 0.25;
-const faixa1 = 2.00;
-const faixa2 = 1.50;
-const faixa3 = 1.00;
+const faixa1 = 2.00; // até 5 km
+const faixa2 = 1.50; // 5 a 15 km
+const faixa3 = 1.00; // acima de 15 km
 
 document.getElementById('calc').onclick = () => {
   const km = parseFloat(dist.value);
   const min = parseFloat(tempo.value);
+
   let valor_km = faixa3;
   if (km <= 5) valor_km = faixa1;
   else if (km <= 15) valor_km = faixa2;
