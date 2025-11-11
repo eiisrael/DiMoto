@@ -76,15 +76,15 @@ btn.onclick = async () => {
     msg.className = 'msg-ok';
 
     // Verifica papel do usuário
-    setTimeout(async () => {
-      const ures = await fetch(API + '/me.php', { credentials: 'include' });
-      const udata = await ures.json().catch(() => ({}));
-      if (udata.user && udata.user.role === 'driver') {
-        location.href = 'driver_dashboard.php';
-      } else {
-        location.href = 'passenger_dashboard.php';
-      }
-    }, 700);
+    // Depois de receber /me.php
+    const ures = await fetch(API + '/me.php', { credentials:'include' });
+    const udata = await ures.json().catch(() => ({}));
+    if (udata.user && udata.user.role === 'driver') {
+      location.href = 'driver_dashboard.php';
+    } else {
+      location.href = 'passenger_dashboard.php';
+    }
+
 
   } catch (e) {
     msg.textContent = 'Falha na conexão com o servidor.';
